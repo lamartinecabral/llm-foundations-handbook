@@ -262,15 +262,15 @@ If GitHub is where developers store and collaborate on code, **Hugging Face is w
 The platform combines artifact hosting, versioning, community discovery, and deployment into one place. Instead of repositories full of source code only, you get model repositories, dataset repositories, and runnable AI demos.
 
 <!-- prettier-ignore -->
-| Hugging Face Component | GitHub Analogy | Why It Matters |
-| :--------------------- | :------------- | :------------- |
-| **Hub** | Repos + discover page for AI artifacts | The default place to discover, version, and share models, datasets, and demo apps. |
-| **Model Card** | README + docs + usage notes | Captures license, limitations, evaluation data, and intended use before you adopt a model. |
-| **Transformers** | SDK/CLI used to clone and run projects locally | Standard Python API for loading, testing, training, and fine-tuning many architectures. |
-| **Datasets** | Data package manager | Makes large-scale data loading, preprocessing, and reproducible experiments much easier. |
-| **Tokenizers** | Build toolchain component | Ensures fast, consistent text preprocessing across training and inference. |
-| **PEFT / TRL** | Advanced contributor workflow tools | Enables practical fine-tuning/alignment (LoRA, DPO, etc.) on limited hardware. |
-| **Spaces / Inference Endpoints** | Pages + deploy platform for AI apps and APIs | Lets teams share prototypes instantly and ship production inference without custom infra. |
+| Hugging Face Component | Why It Matters |
+| :--------------------- | :------------- |
+| **Hub** | The default place to discover, version, and share models, datasets, and demo apps. |
+| **Model Card** | Captures license, limitations, evaluation data, and intended use before you adopt a model. |
+| **Transformers** | Standard Python API for loading, testing, training, and fine-tuning many architectures. |
+| **Datasets** | Makes large-scale data loading, preprocessing, and reproducible experiments much easier. |
+| **Tokenizers** | Ensures fast, consistent text preprocessing across training and inference. |
+| **PEFT / TRL** | Enables practical fine-tuning/alignment (LoRA, DPO, etc.) on limited hardware. |
+| **Spaces / Inference Endpoints** | Lets teams share prototypes instantly and ship production inference without custom infra. |
 
 ### Common Workflow
 
