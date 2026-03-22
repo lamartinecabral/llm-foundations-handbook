@@ -41,7 +41,7 @@ Here is an example of an AI system architecture stack. Each system may have more
 | Agent       | GitHub Copilot    |
 | Provider    | AWS Bedrock       |
 | Inference   | vLLM              |
-| Model       | claude-sonnet-4.6 |
+| Model       | Claude Sonnet 4.6 |
 
 ---
 
