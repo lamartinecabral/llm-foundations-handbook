@@ -6,8 +6,19 @@ This repository serves as a foundational "mental model" and reference guide for 
 
 ## Table of Contents
 
+- [Who is this for?](#who-is-this-for)
 - [The AI Stack](#the-ai-stack)
 - [Model](#model)
+  - [Parameters (Weights)](#parameters-weights)
+  - [Approaches (Dense vs. MoE)](#approaches-dense-vs-moe)
+  - [Capabilities](#capabilities)
+  - [Chat Templates](#chat-templates)
+  - [Architecture](#architecture)
+  - [Context Length (Context Window)](#context-length-context-window)
+  - [Formats](#formats)
+  - [Quantization](#quantization)
+  - [Fine-Tuning](#fine-tuning)
+  - [Sampling & Generation](#sampling--generation)
 - [Inference](#inference)
 - [Hugging Face Ecosystem](#hugging-face-ecosystem)
 - [Retrieval-Augmented Generation (RAG)](#retrieval-augmented-generation-rag)
