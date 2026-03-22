@@ -62,9 +62,10 @@ Think of parameters as the "brain cells" and "synapses" of an AI. When we say a 
 
 This refers to how parameters are utilized when the model is processing text and generating a response.
 
-| Architecture                 | Description                                                                                                                              | Open-Source Examples              | Pros & Cons                                                                                                                                                                                                                            |
-| :--------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Dense Models**             | Every single parameter in the neural network is activated and used to process every single word (token).                                 | Llama 3.3 (70B), Qwen 2.5 (72B)   | **Pros:** Simpler architecture, easier and more stable to train.<br>**Cons:** Computationally expensive to run as they scale up.                                                                                                       |
+<!-- prettier-ignore -->
+| Architecture | Description | Open-Source Examples | Pros & Cons |
+| :----------- | :---------- | :------------------- | :---------- |
+| **Dense Models** | Every single parameter in the neural network is activated and used to process every single word (token). | Llama 3.3 (70B), Qwen 2.5 (72B) | **Pros:** Simpler architecture, easier and more stable to train.<br>**Cons:** Computationally expensive to run as they scale up. |
 | **Mixture of Experts (MoE)** | The model is divided into smaller sub-networks ("experts"). A router activates only the 1 or 2 experts best suited for a specific token. | Llama 4 Scout (109B), DeepSeek-V4 | **Pros:** Massive efficiency gain — only a fraction of parameters are active per token, enabling faster generation.<br>**Cons:** High VRAM usage. Despite the active compute savings, the full model still must be loaded into memory. |
 
 ---
@@ -73,13 +74,14 @@ This refers to how parameters are utilized when the model is processing text and
 
 Modern LLMs have expanded drastically beyond just predicting the next word into specific, highly advanced skill sets.
 
-| Capability                   | Description                                                                                                                    | Modern Examples            |
-| :--------------------------- | :----------------------------------------------------------------------------------------------------------------------------- | :------------------------- |
-| **Reasoning**                | The ability to logically deduce answers and follow "chain-of-thought" processes before outputting an answer.                   | DeepSeek-R1 / V4, GPT-5.4  |
-| **Vision (Multimodality)**   | Processing images/video alongside text natively, allowing the model to describe images or solve visual puzzles.                | Llama 4, Claude 4.6 Sonnet |
-| **Tools (Function Calling)** | Generating structured commands (like JSON) to trigger external tools (e.g., browsing the web, running code).                   | Llama 4, Hermes 3          |
-| **Embedding**                | Turning text into high-dimensional mathematical vectors for semantic search and RAG workflows.                                 | Nomic-embed-text, BGE      |
-| **Insertion (FIM)**          | "Fill-in-the-Middle" models trained to look at text before and after a cursor to generate the missing middle (used in coding). | Qwen2.5-Coder, StarCoder2  |
+<!-- prettier-ignore -->
+| Capability | Description | Modern Examples |
+| :--------- | :---------- | :-------------- |
+| **Reasoning** | The ability to logically deduce answers and follow "chain-of-thought" processes before outputting an answer. | DeepSeek-R1 / V4, GPT-5.4 |
+| **Vision (Multimodality)** | Processing images/video alongside text natively, allowing the model to describe images or solve visual puzzles. | Llama 4, Claude 4.6 Sonnet |
+| **Tools (Function Calling)** | Generating structured commands (like JSON) to trigger external tools (e.g., browsing the web, running code). | Llama 4, Hermes 3 |
+| **Embedding** | Turning text into high-dimensional mathematical vectors for semantic search and RAG workflows. | Nomic-embed-text, BGE |
+| **Insertion (FIM)** | "Fill-in-the-Middle" models trained to look at text before and after a cursor to generate the missing middle (used in coding). | Qwen2.5-Coder, StarCoder2  |
 
 ---
 
@@ -99,11 +101,12 @@ A **Chat Template** is the structural "wrapper" that translates a list of conver
 
 The architecture is the structural wiring of the neural network—how it actually processes the data you feed it.
 
-| Architecture Type              | How it Works                                                                                                                            | Pros & Cons                                                                                                                                              |
-| :----------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Attention (Transformers)**   | Uses "Self-Attention" to look at all words in a sentence simultaneously and calculate how strongly they relate to one another.          | **Pros:** Incredible reasoning and precise recall.<br>**Cons:** Memory required scales quadratically as context grows (doubling context quadruples RAM). |
-| **Mamba (SSMs)**               | Processes text selectively, compressing the history of the conversation into a fixed-size mathematical state as it reads left-to-right. | **Pros:** Handles massive context windows with minimal RAM.<br>**Cons:** Can struggle with recalling specific data buried in the middle.                 |
-| **Hybrid (Mamba + Attention)** | Interleaves Mamba layers with standard Transformer attention layers.                                                                    | **Pros:** Combines Mamba's speed with Transformer's sharp recall.<br>**Cons:** Highly complex to engineer and run on consumer hardware.                  |
+<!-- prettier-ignore -->
+| Architecture Type | How it Works | Pros & Cons |
+| :---------------- | :----------- | :---------- |
+| **Attention (Transformers)** | Uses "Self-Attention" to look at all words in a sentence simultaneously and calculate how strongly they relate to one another. | **Pros:** Incredible reasoning and precise recall.<br>**Cons:** Memory required scales quadratically as context grows (doubling context quadruples RAM). |
+| **Mamba (SSMs)** | Processes text selectively, compressing the history of the conversation into a fixed-size mathematical state as it reads left-to-right. | **Pros:** Handles massive context windows with minimal RAM.<br>**Cons:** Can struggle with recalling specific data buried in the middle. |
+| **Hybrid (Mamba + Attention)** | Interleaves Mamba layers with standard Transformer attention layers. | **Pros:** Combines Mamba's speed with Transformer's sharp recall.<br>**Cons:** Highly complex to engineer and run on consumer hardware. |
 
 ---
 
@@ -115,11 +118,12 @@ Think of context length as the AI's "short-term working memory." It is completel
 
 **Context Limits:** As AI evolves, standard context windows continue to expand:
 
-| Tier                 | Token Limit  | Best Used For                                                          | Examples                             |
-| :------------------- | :----------- | :--------------------------------------------------------------------- | :----------------------------------- |
-| **Standard**         | 8K to 32K    | Daily chat, summarizing short articles, or debugging short scripts.    | Llama 3 8B, Mistral 7B               |
-| **Long Context**     | 128K to 256K | Digesting entire novels, financial reports, or large codebases.        | Qwen 3, Llama 3.3                    |
-| **Frontier Context** | 1M to 10M    | Ingesting massive document repositories or retaining long-term memory. | Llama 4 Scout (10M), Claude 4.6 (1M) |
+<!-- prettier-ignore -->
+| Tier | Token Limit | Best Used For | Examples |
+| :--- | :---------- | :------------ | :------- |
+| **Standard** | 8K to 32K | Daily chat, summarizing short articles, or debugging short scripts. | Llama 3 8B, Mistral 7B |
+| **Long Context** | 128K to 256K | Digesting entire novels, financial reports, or large codebases. | Qwen 3, Llama 3.3 |
+| **Frontier Context** | 1M to 10M | Ingesting massive document repositories or retaining long-term memory. | Llama 4 Scout (10M), Claude 4.6 (1M) |
 
 <figure style="text-align: center;">
   <img src="./public/images/context-window.png" alt="Three-turn chat showing how prior inputs, reasoning, and outputs consume a 128k context window until later output gets truncated.">
@@ -132,13 +136,14 @@ Think of context length as the AI's "short-term working memory." It is completel
 
 Once a model is trained, its billions of parameters need to be saved into a file. The format you choose depends entirely on your hardware and software stack.
 
-| Format          | Best For        | Description                                                                              |
-| :-------------- | :-------------- | :--------------------------------------------------------------------------------------- |
-| **Safetensors** | Cloud / Python  | Hugging Face standard. Loads incredibly fast and cannot harbor malicious code.           |
+<!-- prettier-ignore -->
+| Format.         | Best For.       | Description |
+| :-------------- | :-------------- | :---------- |
+| **Safetensors** | Cloud / Python  | Hugging Face standard. Loads incredibly fast and cannot harbor malicious code. |
 | **GGUF**        | Local AI / CPUs | llama.cpp standard. Portable file that easily splits the workload between CPUs and GPUs. |
-| **ONNX**        | Enterprise Apps | Microsoft/Meta standard for strict interoperability across different software stacks.    |
-| **MLX**         | Apple Silicon   | Apple's native format optimized to leverage the unified memory of M-series chips.        |
-| **MLC**         | Web / Mobile    | Compressed to run entirely client-side via WebAssembly/WebGPU without a backend server.  |
+| **ONNX**        | Enterprise Apps | Microsoft/Meta standard for strict interoperability across different software stacks. |
+| **MLX**         | Apple Silicon   | Apple's native format optimized to leverage the unified memory of M-series chips. |
+| **MLC**         | Web / Mobile    | Compressed to run entirely client-side via WebAssembly/WebGPU without a backend server. |
 
 ---
 
@@ -176,12 +181,13 @@ When an LLM predicts the next word, it doesn't just pick one; it generates a mas
 - **Analogy:** Imagine a chef deciding what ingredient to add next to a soup. A strict chef (low randomness) always picks the most obvious, safe choice (salt). A creative chef (high randomness) might occasionally throw in something less expected (cinnamon) to create a unique flavor profile.
 - **Structured / Constrained Decoding:** Libraries like **Outlines** and **LMFE** go a step further by mathematically _constraining_ the sampling process to guarantee outputs conform to a specific format (e.g., a JSON schema or regex pattern). This is increasingly the standard approach for reliable function-calling and object generation, eliminating the need for fragile post-processing.
 
-| Parameter              | How it Works                                                                                                                                                                                                                          | Best Used For                                                                                                                                            |
-| :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Temperature**        | The master dial for randomness. A value of 0 makes the model strictly pick the highest-probability token every time. Higher values (e.g., 0.7 to 1.0) flatten the probability curve, giving less likely words a fighting chance.      | **Low (0.0 - 0.3):** Coding, math, factual data extraction.<br>**High (0.7+):** Brainstorming, creative writing, storytelling.                           |
-| **Top-K**              | Sorts the predicted tokens by probability and outright discards everything below the "K"th rank. If Top-K is set to 40, the model is only allowed to choose from the top 40 most likely next words.                                   | Trimming the absolute worst guesses. It prevents the model from hallucinating or generating gibberish by cutting off ultra-low probability tokens.       |
+<!-- prettier-ignore -->
+| Parameter              | How it Works | Best Used For |
+| :--------------------- | :----------- | :------------ |
+| **Temperature**        | The master dial for randomness. A value of 0 makes the model strictly pick the highest-probability token every time. Higher values (e.g., 0.7 to 1.0) flatten the probability curve, giving less likely words a fighting chance. | **Low (0.0 - 0.3):** Coding, math, factual data extraction.<br>**High (0.7+):** Brainstorming, creative writing, storytelling. |
+| **Top-K**              | Sorts the predicted tokens by probability and outright discards everything below the "K"th rank. If Top-K is set to 40, the model is only allowed to choose from the top 40 most likely next words. | Trimming the absolute worst guesses. It prevents the model from hallucinating or generating gibberish by cutting off ultra-low probability tokens. |
 | **Top-P (Nucleus)**    | Adds up the probabilities of the top tokens until they hit a combined "P" threshold (e.g., 0.90 or 90%). It then discards all remaining tokens. The pool of choices shrinks or grows dynamically based on how confident the model is. | A smarter, more dynamic alternative to Top-K. Great for maintaining coherent text while still allowing for a natural, controlled variance in vocabulary. |
-| **Repetition Penalty** | Artificially lowers the probability of tokens that have already appeared recently in the generated text, making the model look for fresh words.                                                                                       | Preventing the model from getting stuck in an infinite loop where it repeats the exact same phrase over and over.                                        |
+| **Repetition Penalty** | Artificially lowers the probability of tokens that have already appeared recently in the generated text, making the model look for fresh words. | Preventing the model from getting stuck in an infinite loop where it repeats the exact same phrase over and over. |
 
 ---
 
@@ -191,17 +197,18 @@ If an LLM’s weights (the data) are the "brain," the inference engine is the "n
 
 ### The Inference Landscape
 
-| Category             | Engine             | Description                                                                                 |
-| :------------------- | :----------------- | :------------------------------------------------------------------------------------------ |
-| **The Standards**    | Transformers       | Hugging Face's "Research Lab" engine. Essential for building, but memory-heavy.             |
-|                      | vLLM               | The "Data Center Standard." Fastest for concurrent users using smart memory management.     |
-|                      | llama.cpp          | The "Everyman’s Engine." Written in C++ to run GGUF models on everyday CPUs and Macs.       |
-| **High-Performance** | TensorRT-LLM       | The absolute highest throughput possible, but locked entirely to NVIDIA chips.              |
+<!-- prettier-ignore -->
+| Category             | Engine             | Description |
+| :------------------- | :----------------- | :---------- |
+| **The Standards**    | Transformers       | Hugging Face's "Research Lab" engine. Essential for building, but memory-heavy. |
+|                      | vLLM               | The "Data Center Standard." Fastest for concurrent users using smart memory management. |
+|                      | llama.cpp          | The "Everyman’s Engine." Written in C++ to run GGUF models on everyday CPUs and Macs. |
+| **High-Performance** | TensorRT-LLM       | The absolute highest throughput possible, but locked entirely to NVIDIA chips. |
 |                      | SGLang             | Blazing-fast engine optimized for complex prompt workflows and agents using prefix caching. |
-|                      | ExLlamaV2          | The "Local Speed Demon" for single-user generation on consumer NVIDIA GPUs.                 |
+|                      | ExLlamaV2          | The "Local Speed Demon" for single-user generation on consumer NVIDIA GPUs. |
 | **User-Friendly**    | Ollama / LM Studio | Lightweight desktop applications for browsing, downloading, and chatting with local models. |
-|                      | GPT4All            | Privacy-first desktop application focused on reading your local documents (RAG).            |
-|                      | Llamafile          | Packages an LLM and its engine into a single executable file (like a portable USB drive).   |
+|                      | GPT4All            | Privacy-first desktop application focused on reading your local documents (RAG). |
+|                      | Llamafile          | Packages an LLM and its engine into a single executable file (like a portable USB drive). |
 
 ### Which engine should you choose?
 
@@ -222,15 +229,16 @@ If GitHub is where developers store and collaborate on code, **Hugging Face is w
 
 The platform combines artifact hosting, versioning, community discovery, and deployment into one place. Instead of repositories full of source code only, you get model repositories, dataset repositories, and runnable AI demos.
 
-| Hugging Face Component           | GitHub Analogy                                 | Why It Matters                                                                             |
-| :------------------------------- | :--------------------------------------------- | :----------------------------------------------------------------------------------------- |
-| **Hub**                          | Repos + discover page for AI artifacts         | The default place to discover, version, and share models, datasets, and demo apps.         |
-| **Model Card**                   | README + docs + usage notes                    | Captures license, limitations, evaluation data, and intended use before you adopt a model. |
-| **Transformers**                 | SDK/CLI used to clone and run projects locally | Standard Python API for loading, testing, training, and fine-tuning many architectures.    |
-| **Datasets**                     | Data package manager                           | Makes large-scale data loading, preprocessing, and reproducible experiments much easier.   |
-| **Tokenizers**                   | Build toolchain component                      | Ensures fast, consistent text preprocessing across training and inference.                 |
-| **PEFT / TRL**                   | Advanced contributor workflow tools            | Enables practical fine-tuning/alignment (LoRA, DPO, etc.) on limited hardware.             |
-| **Spaces / Inference Endpoints** | Pages + deploy platform for AI apps and APIs   | Lets teams share prototypes instantly and ship production inference without custom infra.  |
+<!-- prettier-ignore -->
+| Hugging Face Component           | GitHub Analogy | Why It Matters |
+| :------------------------------- | :------------- | :------------- |
+| **Hub**                          | Repos + discover page for AI artifacts | The default place to discover, version, and share models, datasets, and demo apps. |
+| **Model Card**                   | README + docs + usage notes | Captures license, limitations, evaluation data, and intended use before you adopt a model. |
+| **Transformers**                 | SDK/CLI used to clone and run projects locally | Standard Python API for loading, testing, training, and fine-tuning many architectures. |
+| **Datasets**                     | Data package manager | Makes large-scale data loading, preprocessing, and reproducible experiments much easier. |
+| **Tokenizers**                   | Build toolchain component | Ensures fast, consistent text preprocessing across training and inference. |
+| **PEFT / TRL**                   | Advanced contributor workflow tools | Enables practical fine-tuning/alignment (LoRA, DPO, etc.) on limited hardware. |
+| **Spaces / Inference Endpoints** | Pages + deploy platform for AI apps and APIs | Lets teams share prototypes instantly and ship production inference without custom infra. |
 
 ### Common Workflow
 
@@ -259,12 +267,13 @@ Retrieval-Augmented Generation (RAG) is the critical bridge connecting the **App
 
 A standard RAG system operates in a multi-step workflow behind the scenes every time a user asks a question:
 
-| Step  | Phase                         | What Happens                                                                                                                                                                                                                                                                 |
-| :---- | :---------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **1** | **Ingestion & Chunking**      | Large documents (PDFs, wikis, code) are broken down into smaller, manageable paragraphs or "chunks." This ensures the data is bite-sized enough for the AI to process efficiently.                                                                                           |
-| **2** | **Embedding**                 | A specialized, lightweight AI (an Embedding Model) converts these text chunks into high-dimensional arrays of numbers (vectors). This translates human language into mathematical coordinates.                                                                               |
-| **3** | **Storage**                   | These vectors are saved in a **Vector Database**. Texts with similar meanings (e.g., "puppy" and "dog") are stored close together in this mathematical space.                                                                                                                |
-| **4** | **Retrieval**                 | When a user types a prompt, their question is also converted into a vector. The database searches for the stored vectors mathematically closest to the question's vector, instantly retrieving the most relevant chunks of text.                                             |
+<!-- prettier-ignore -->
+| Step  | Phase                         | What Happens |
+| :---- | :---------------------------- | :----------- |
+| **1** | **Ingestion & Chunking**      | Large documents (PDFs, wikis, code) are broken down into smaller, manageable paragraphs or "chunks." This ensures the data is bite-sized enough for the AI to process efficiently. |
+| **2** | **Embedding**                 | A specialized, lightweight AI (an Embedding Model) converts these text chunks into high-dimensional arrays of numbers (vectors). This translates human language into mathematical coordinates. |
+| **3** | **Storage**                   | These vectors are saved in a **Vector Database**. Texts with similar meanings (e.g., "puppy" and "dog") are stored close together in this mathematical space. |
+| **4** | **Retrieval**                 | When a user types a prompt, their question is also converted into a vector. The database searches for the stored vectors mathematically closest to the question's vector, instantly retrieving the most relevant chunks of text. |
 | **5** | **Augmentation & Generation** | The Application layer takes the user's original prompt _plus_ the retrieved text chunks, bundles them together, and sends them to the **Inference** engine. The **Model** reads this augmented prompt and generates an accurate answer based purely on the provided context. |
 
 ---
@@ -273,12 +282,13 @@ A standard RAG system operates in a multi-step workflow behind the scenes every 
 
 Building a RAG system introduces a few specialized tools into the broader AI stack:
 
-| Component            | Purpose                                                                                                                                                                                                 | Popular Examples                                                      |
-| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------- |
-| **Orchestrators**    | The "glue" frameworks that wire the Application layer to the Vector DB and the LLM API. They handle the logic of the entire pipeline.                                                                   | **LangChain**, **LlamaIndex**, **Haystack**                           |
-| **Vector Databases** | Specialized databases built specifically to store, index, and query vector embeddings at lightning speed.                                                                                               | **ChromaDB** (Local), **Qdrant**, **Pinecone** (Cloud), **Milvus**    |
-| **Embedding Models** | Lightweight models designed strictly to translate text into vector coordinates.                                                                                                                         | **Nomic-embed-text** (Local), **OpenAI text-embedding-3**, **BGE-M3** |
-| **Rerankers**        | An optional but powerful secondary model that acts as a quality filter. It double-checks the retrieved documents and re-orders them to ensure the LLM only sees the absolute most relevant information. | **Cohere Rerank**, **BGE-Reranker**, **Jina Reranker**                |
+<!-- prettier-ignore -->
+| Component            | Purpose | Popular Examples |
+| :------------------- | :------ | :--------------- |
+| **Orchestrators**    | The "glue" frameworks that wire the Application layer to the Vector DB and the LLM API. They handle the logic of the entire pipeline. | **LangChain**, **LlamaIndex**, **Haystack** |
+| **Vector Databases** | Specialized databases built specifically to store, index, and query vector embeddings at lightning speed. | **ChromaDB** (Local), **Qdrant**, **Pinecone** (Cloud), **Milvus** |
+| **Embedding Models** | Lightweight models designed strictly to translate text into vector coordinates. | **Nomic-embed-text** (Local), **OpenAI text-embedding-3**, **BGE-M3** |
+| **Rerankers**        | An optional but powerful secondary model that acts as a quality filter. It double-checks the retrieved documents and re-orders them to ensure the LLM only sees the absolute most relevant information. | **Cohere Rerank**, **BGE-Reranker**, **Jina Reranker** |
 
 ---
 
@@ -286,9 +296,10 @@ Building a RAG system introduces a few specialized tools into the broader AI sta
 
 As AI has evolved, the basic RAG pipeline has been upgraded to handle much more complex, messy, and interconnected data. Developers now categorize RAG into a few distinct architectural approaches:
 
-| Approach         | How it Works                                                                                                                                                                                                                                                                                                      | Best Used For                                                                                                             |
-| :--------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ |
-| **Naive RAG**    | The foundational "Chunk → Embed → Retrieve → Generate" pipeline. It takes the user's exact prompt, finds the closest matching text chunks, and feeds them to the LLM.                                                                                                                                             | Simple Q&A bots, querying highly structured and clean internal wikis, or basic customer support.                          |
+<!-- prettier-ignore -->
+| Approach         | How it Works | Best Used For |
+| :--------------- | :----------- | :------------ |
+| **Naive RAG**    | The foundational "Chunk → Embed → Retrieve → Generate" pipeline. It takes the user's exact prompt, finds the closest matching text chunks, and feeds them to the LLM. | Simple Q&A bots, querying highly structured and clean internal wikis, or basic customer support. |
 | **Advanced RAG** | Introduces "Pre-Retrieval" and "Post-Retrieval" optimizations. Before searching, it might use a smaller AI to rewrite or expand the user's query for better search results. After retrieving the chunks, it uses a **Reranker** model to filter out irrelevant noise before sending the final context to the LLM. | Enterprise search, analyzing dense financial PDFs, or any system where accuracy and avoiding hallucinations are critical. |
-| **GraphRAG**     | Combines standard vector databases with **Knowledge Graphs**. Instead of just finding paragraphs with similar words, it maps out the mathematical relationships between entities (e.g., mapping that "Person A" works for "Company B" which owns "Product C").                                                    | Investigating complex networks, connecting the dots across hundreds of separate documents, or legal discovery.            |
-| **Agentic RAG**  | The most dynamic approach. Instead of a hard-coded pipeline, an AI Agent is given access to search tools and decides _autonomously_ if it needs to search, what queries to run, and if it needs to run follow-up searches based on the first set of results (multi-hop reasoning).                                | Coding assistants debugging a massive repository, complex research tasks, and open-ended analysis.                        |
+| **GraphRAG**     | Combines standard vector databases with **Knowledge Graphs**. Instead of just finding paragraphs with similar words, it maps out the mathematical relationships between entities (e.g., mapping that "Person A" works for "Company B" which owns "Product C"). | Investigating complex networks, connecting the dots across hundreds of separate documents, or legal discovery. |
+| **Agentic RAG**  | The most dynamic approach. Instead of a hard-coded pipeline, an AI Agent is given access to search tools and decides _autonomously_ if it needs to search, what queries to run, and if it needs to run follow-up searches based on the first set of results (multi-hop reasoning). | Coding assistants debugging a massive repository, complex research tasks, and open-ended analysis. |
