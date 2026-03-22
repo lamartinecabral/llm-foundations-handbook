@@ -21,6 +21,7 @@ This repository serves as a foundational "mental model" and reference guide for 
   - [Sampling & Generation](#sampling--generation)
 - [Inference](#inference)
 - [Hugging Face Ecosystem](#hugging-face-ecosystem)
+- [Agents & Tool Use](#agents--tool-use)
 - [Retrieval-Augmented Generation (RAG)](#retrieval-augmented-generation-rag)
 
 ## Who is this for?
@@ -254,6 +255,38 @@ The platform combines artifact hosting, versioning, community discovery, and dep
 - Pin exact model revisions when moving from experimentation to production.
 - Keep tokenizer and model versions aligned to avoid subtle inference errors.
 - Treat Hub artifacts like code: use branches, pull requests, and immutable tags for releases.
+
+---
+
+## Agents & Tool Use
+
+If a standard LLM is a "brain in a jar" that can only answer questions based on its training data, an **Agent** is that same brain given hands, eyes, and a to-do list.
+
+Agents are systems where an LLM is used as the core reasoning engine to autonomously decide which actions to take, execute them, evaluate the results, and repeat the process until a complex goal is achieved.
+
+### The ReAct Loop (Reason + Act)
+
+The foundational architecture for almost all modern AI agents is the **ReAct** framework. It forces the model to interleave internal reasoning with external actions.
+
+Instead of just blurting out an answer, the agent is programmed to operate in a continuous feedback loop consisting of three phases:
+
+<!-- prettier-ignore -->
+| Phase | What Happens | Example |
+| :---- | :----------- | :------ |
+| **Thought** | The LLM acts as an internal monologue, breaking down the user's prompt and deciding what it needs to do next. | *"To find out if we have enough stock to fulfill this order, I first need to check the inventory database for SKU-992."* |
+| **Action** | The LLM outputs a structured command (usually JSON) to trigger a specific tool. | `call_tool("check_inventory", {"sku": "SKU-992"})` |
+| **Observation** | The external tool runs and returns raw data back to the LLM, which the LLM reads to inform its next "Thought". | `{"status": "success", "stock_count": 4}` |
+
+The system repeats this `Thought → Action → Observation` loop continuously until the LLM decides it has enough information to provide a final answer to the user.
+
+### Tool Use (Function Calling) Demystified
+
+The most important concept to grasp about Tool Use is that **the LLM does not actually run code or browse the internet itself.** Here is exactly how "Tool Calling" works under the hood:
+
+1. **The Setup:** The developer writes standard code functions (e.g., a Python script to query a database or a weather API).
+2. **The Prompt:** The developer passes the _descriptions_ of these tools to the LLM (e.g., "You have a tool called `get_weather`. It requires a `location` parameter.").
+3. **The Generation:** If the LLM decides it needs the weather, it stops generating standard text and instead generates a perfectly formatted JSON object requesting that tool.
+4. **The Execution:** The developer's application (the orchestrator) intercepts this JSON, pauses the LLM, runs the actual Python code locally, and feeds the resulting data back into the LLM's prompt as an "Observation".
 
 ---
 
