@@ -12,7 +12,7 @@ This repository serves as a foundational "mental model" and reference guide for 
 
 ---
 
-# 0. The AI Stack
+# The AI Stack
 
 Here is an example of an AI system architecture stack. Each system may have more or fewer layers, but this stack is a common foundational standard.
 
@@ -26,9 +26,9 @@ Here is an example of an AI system architecture stack. Each system may have more
 
 ---
 
-# 1. Model
+# Model
 
-### 1.1. Parameters (Weights)
+### Parameters (Weights)
 
 Think of parameters as the "brain cells" and "synapses" of an AI. When we say a model is "8 billion parameters" (8B) or "400 billion parameters" (400B), we are referring to the total count of these numbers.
 
@@ -39,7 +39,7 @@ Think of parameters as the "brain cells" and "synapses" of an AI. When we say a 
 
 ---
 
-### 1.2. Approaches (Dense vs. MoE)
+### Approaches (Dense vs. MoE)
 
 This refers to how parameters are utilized when the model is processing text and generating a response.
 
@@ -50,7 +50,7 @@ This refers to how parameters are utilized when the model is processing text and
 
 ---
 
-### 1.3. Capabilities
+### Capabilities
 
 Modern LLMs have expanded drastically beyond just predicting the next word into specific, highly advanced skill sets.
 
@@ -64,7 +64,7 @@ Modern LLMs have expanded drastically beyond just predicting the next word into 
 
 ---
 
-### 1.4. Chat Templates
+### Chat Templates
 
 A **Chat Template** is the structural "wrapper" that translates a list of conversational messages (System, User, Assistant) into a single long string of text that the model can actually understand.
 
@@ -76,7 +76,7 @@ A **Chat Template** is the structural "wrapper" that translates a list of conver
 
 ---
 
-### 1.5. Architecture
+### Architecture
 
 The architecture is the structural wiring of the neural network—how it actually processes the data you feed it.
 
@@ -88,7 +88,7 @@ The architecture is the structural wiring of the neural network—how it actuall
 
 ---
 
-### 1.6. Context Length (Context Window)
+### Context Length (Context Window)
 
 Think of context length as the AI's "short-term working memory." It is completely separate from its permanent parameter "brain."
 
@@ -109,7 +109,7 @@ Think of context length as the AI's "short-term working memory." It is completel
 
 ---
 
-### 1.7. Formats
+### Formats
 
 Once a model is trained, its billions of parameters need to be saved into a file. The format you choose depends entirely on your hardware and software stack.
 
@@ -123,7 +123,7 @@ Once a model is trained, its billions of parameters need to be saved into a file
 
 ---
 
-### 1.8. Quantization
+### Quantization
 
 Quantization is the process of compressing the model to make it smaller and faster to run, usually for local use.
 
@@ -134,7 +134,7 @@ Quantization is the process of compressing the model to make it smaller and fast
 
 ---
 
-### 1.9. Fine-Tuning
+### Fine-Tuning
 
 Fine-tuning is the process of taking an already trained "base" model and training it further on a smaller, highly targeted dataset to change its behavior or master a specific task.
 
@@ -142,12 +142,13 @@ Fine-tuning is the process of taking an already trained "base" model and trainin
 - **Instruction Tuning:** The most common form of fine-tuning. Models are trained on thousands of structured human conversations to learn how to follow instructions and respect safety guardrails.
 - **Full Fine-Tuning:** The computationally expensive method where every single parameter in the model is updated during training.
 - **PEFT & LoRA:** Parameter-Efficient Fine-Tuning freezes the base model and trains a tiny, lightweight "adapter" on top of it. LoRA (Low-Rank Adaptation) allows a developer to fine-tune a massive model using a single consumer graphics card in just a few hours.
+- **Alignment (RLHF / DPO / GRPO):** After instruction tuning, models are aligned with human preferences using feedback techniques. **RLHF** trains a reward model from human rankings to guide outputs. Newer methods like **DPO** and **GRPO** skip the reward model entirely, achieving equivalent alignment far more efficiently.
 
 [LoRA Fine-Tuning Example](./public/examples/lora-fine-tuning.py)
 
 ---
 
-### 1.10. Sampling & Generation
+### Sampling & Generation
 
 When an LLM predicts the next word, it doesn't just pick one; it generates a massive list of probabilities for every token in its vocabulary. "Sampling" is the set of rules that dictates how the model chooses the final winner from that list.
 
@@ -165,7 +166,7 @@ When an LLM predicts the next word, it doesn't just pick one; it generates a mas
 
 ---
 
-# 2. Inference
+# Inference
 
 If an LLM’s weights (the data) are the "brain," the inference engine is the "nervous system" and "muscles." An inference engine is the software responsible for loading the model into memory, processing your prompt, and performing the massive mathematical calculations required to generate words.
 
@@ -196,13 +197,13 @@ If an LLM’s weights (the data) are the "brain," the inference engine is the "n
 
 ---
 
-# 3. Retrieval-Augmented Generation (RAG)
+# Retrieval-Augmented Generation (RAG)
 
 Retrieval-Augmented Generation (RAG) is the critical bridge connecting the **Application** layer to the **Model** layer. While standard LLMs are limited by their training cutoff dates and lack access to private information, RAG allows an AI to securely read, analyze, and cite external, live, or proprietary data (like your company's internal PDFs, live databases, or massive code repositories) _without_ needing to retrain or fine-tune the model.
 
 - **The Analogy:** If an LLM is a brilliant student taking an open-book exam, RAG is the hyper-efficient librarian who instantly fetches the exact textbook pages the student needs to read right before answering the question.
 
-### 3.1. The RAG Pipeline (How it Works)
+### The RAG Pipeline (How it Works)
 
 A standard RAG system operates in a multi-step workflow behind the scenes every time a user asks a question:
 
@@ -216,7 +217,7 @@ A standard RAG system operates in a multi-step workflow behind the scenes every 
 
 ---
 
-### 3.2. The RAG Tech Stack
+### The RAG Tech Stack
 
 Building a RAG system introduces a few specialized tools into the broader AI stack:
 
@@ -229,7 +230,7 @@ Building a RAG system introduces a few specialized tools into the broader AI sta
 
 ---
 
-### 3.3. RAG Approaches
+### RAG Approaches
 
 As AI has evolved, the basic RAG pipeline has been upgraded to handle much more complex, messy, and interconnected data. Developers now categorize RAG into a few distinct architectural approaches:
 
