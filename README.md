@@ -196,6 +196,35 @@ When an LLM predicts the next word, it doesn't just pick one; it generates a mas
 
 If an LLM’s weights (the data) are the "brain," the inference engine is the "nervous system" and "muscles." An inference engine is the software responsible for loading the model into memory, processing your prompt, and performing the massive mathematical calculations required to generate words.
 
+### Hardware & Accelerators (The GPU Landscape)
+
+While the Inference Engine is the software muscle, the actual physical hardware determines what you can run and how fast you can run it.
+
+The most important concept to understand about AI hardware is **The VRAM Bottleneck**. Generating text (inference) is rarely limited by the raw compute speed (teraFLOPS) of a chip. Instead, it is almost entirely bound by **Memory Bandwidth** and **VRAM Capacity** (Video RAM). The entire model must be loaded into the GPU's ultra-fast memory to run efficiently. If a model requires 40GB of memory and your GPU only has 24GB, it will severely bottleneck or fail to run, regardless of how fast the processor itself is.
+
+Because of this, the AI hardware landscape is highly segmented based on memory availability:
+
+<!-- prettier-ignore -->
+| Hardware Tier | Prime Examples | Why It Matters |
+| :------------ | :------------- | :------------- |
+| **Consumer GPUs (Local)** | **NVIDIA RTX 4090 (24GB)**<br>**NVIDIA RTX 5090 (32GB)** | The standard for local AI. High VRAM (24GB+) enables running large, quantized models (up to 70B parameters) at home, with massive bandwidth for fast generation. |
+| **Apple Silicon (Unified)** | **Mac Studio (M3 Ultra)**<br>**MacBook Pro (M-Series)** | Uses "Unified Memory" to pool massive amounts of RAM (up to 512GB). Allows running enterprise-grade models locally without buying multiple expensive PC graphics cards. |
+| **Enterprise Datacenter** | **NVIDIA H100 (80GB)**<br>**NVIDIA B200 (192GB)** | The heavyweights behind major APIs like OpenAI. Built with immense VRAM to serve hundreds of concurrent users at blistering speeds, but prohibitively expensive to own. |
+| **Cloud ASICs (Custom)** | **AWS Inferentia2**<br>**Google TPUs** | Purpose-built AI chips offering a cost-effective cloud alternative to NVIDIA. Allows for massive, scale-out distributed inference at a fraction of the traditional hardware cost. |
+
+---
+
+### The "Math" of Sizing Hardware
+
+When determining what hardware you need to run a specific model, engineers use a basic rule of thumb based on **Quantization**:
+
+- **1 Billion Parameters ≈ 1 GB of VRAM** (when heavily quantized to 4-bit or 8-bit precision).
+- **Context Window Overhead:** You must also reserve a few gigabytes of VRAM for the "KV Cache" (the memory required to remember the ongoing conversation).
+
+Therefore, to run an 8B parameter model with a decent conversation history, an 8GB to 12GB consumer graphics card is the practical minimum.
+
+---
+
 ### The Inference Landscape
 
 <!-- prettier-ignore -->
@@ -210,6 +239,8 @@ If an LLM’s weights (the data) are the "brain," the inference engine is the "n
 | **User-Friendly** | Ollama / LM Studio | Lightweight desktop applications for browsing, downloading, and chatting with local models. |
 | | GPT4All | Privacy-first desktop application focused on reading your local documents (RAG). |
 | | Llamafile | Packages an LLM and its engine into a single executable file (like a portable USB drive). |
+
+---
 
 ### Which engine should you choose?
 
