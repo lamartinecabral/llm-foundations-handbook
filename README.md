@@ -12,7 +12,7 @@ This repository serves as a foundational "mental model" and reference guide for 
 
 ---
 
-# 0\. The AI Stack
+# 0. The AI Stack
 
 Here is an example of an AI system architecture stack. Each system may have more or fewer layers, but this stack is a common foundational standard.
 
@@ -26,7 +26,7 @@ Here is an example of an AI system architecture stack. Each system may have more
 
 ---
 
-# 1\. Model
+# 1. Model
 
 ### 1.1. Parameters (Weights)
 
@@ -43,10 +43,10 @@ Think of parameters as the "brain cells" and "synapses" of an AI. When we say a 
 
 This refers to how parameters are utilized when the model is processing text and generating a response.
 
-| Architecture                 | Description                                                                                                                              | Open-Source Examples              | Pros & Cons                                                                                                                               |
-| :--------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
-| **Dense Models**             | Every single parameter in the neural network is activated and used to process every single word (token).                                 | Llama 3.3 (70B), Qwen 2.5 (72B)   | **Pros:** Simpler architecture, easier and more stable to train.<br>**Cons:** Computationally expensive to run as they scale up.          |
-| **Mixture of Experts (MoE)** | The model is divided into smaller sub-networks ("experts"). A router activates only the 1 or 2 experts best suited for a specific token. | Llama 4 Scout (109B), DeepSeek-V4 | **Pros:** Massive efficiency and faster text generation.<br>**Cons:** High VRAM usage. The entire model must still be loaded into memory. |
+| Architecture                 | Description                                                                                                                              | Open-Source Examples              | Pros & Cons                                                                                                                                                                                                                            |
+| :--------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Dense Models**             | Every single parameter in the neural network is activated and used to process every single word (token).                                 | Llama 3.3 (70B), Qwen 2.5 (72B)   | **Pros:** Simpler architecture, easier and more stable to train.<br>**Cons:** Computationally expensive to run as they scale up.                                                                                                       |
+| **Mixture of Experts (MoE)** | The model is divided into smaller sub-networks ("experts"). A router activates only the 1 or 2 experts best suited for a specific token. | Llama 4 Scout (109B), DeepSeek-V4 | **Pros:** Massive efficiency gain — only a fraction of parameters are active per token, enabling faster generation.<br>**Cons:** High VRAM usage. Despite the active compute savings, the full model still must be loaded into memory. |
 
 ---
 
@@ -80,11 +80,11 @@ A **Chat Template** is the structural "wrapper" that translates a list of conver
 
 The architecture is the structural wiring of the neural network—how it actually processes the data you feed it.
 
-| Architecture Type              | How it Works                                                                                                                            | Pros & Cons                                                                                                                              |
-| :----------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
-| **Attention (Transformers)**   | Uses "Self-Attention" to look at all words in a sentence simultaneously and calculate how strongly they relate to one another.          | **Pros:** Incredible reasoning and precise recall.<br>**Cons:** Memory required explodes exponentially as context grows.                 |
-| **Mamba (SSMs)**               | Processes text selectively, compressing the history of the conversation into a fixed-size mathematical state as it reads left-to-right. | **Pros:** Handles massive context windows with minimal RAM.<br>**Cons:** Can struggle with recalling specific data buried in the middle. |
-| **Hybrid (Mamba + Attention)** | Interleaves Mamba layers with standard Transformer attention layers.                                                                    | **Pros:** Combines Mamba's speed with Transformer's sharp recall.<br>**Cons:** Highly complex to engineer and run on consumer hardware.  |
+| Architecture Type              | How it Works                                                                                                                            | Pros & Cons                                                                                                                                              |
+| :----------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Attention (Transformers)**   | Uses "Self-Attention" to look at all words in a sentence simultaneously and calculate how strongly they relate to one another.          | **Pros:** Incredible reasoning and precise recall.<br>**Cons:** Memory required scales quadratically as context grows (doubling context quadruples RAM). |
+| **Mamba (SSMs)**               | Processes text selectively, compressing the history of the conversation into a fixed-size mathematical state as it reads left-to-right. | **Pros:** Handles massive context windows with minimal RAM.<br>**Cons:** Can struggle with recalling specific data buried in the middle.                 |
+| **Hybrid (Mamba + Attention)** | Interleaves Mamba layers with standard Transformer attention layers.                                                                    | **Pros:** Combines Mamba's speed with Transformer's sharp recall.<br>**Cons:** Highly complex to engineer and run on consumer hardware.                  |
 
 ---
 
@@ -130,6 +130,7 @@ Quantization is the process of compressing the model to make it smaller and fast
 - **How it works:** Originally, model weights are stored in high-precision formats like 16-bit floating-point (FP16). Quantization rounds these numbers down to lower precisions, like 8-bit, 4-bit, or even 2-bit integers.
 - **Benefits:** Drastically reduces the file size and the RAM/VRAM required to run the model, while significantly speeding up text generation.
 - **Drawbacks:** You lose a tiny bit of precision, though modern quantization methods make this loss almost unnoticeable for most everyday tasks.
+- **Common Schemes:** Popular formats include **Q4_K_M** and **Q8_0** (GGUF quantization levels for llama.cpp), **AWQ** (Activation-Aware Weight Quantization), and **GPTQ** (GPU-optimized post-training quantization).
 
 ---
 
@@ -153,6 +154,7 @@ When an LLM predicts the next word, it doesn't just pick one; it generates a mas
 - **What it is:** A collection of mathematical dials that control the randomness, creativity, and predictability of the AI's output.
 - **What it does:** Instead of always picking the \#1 most likely next word (which often results in dry, robotic, or repetitive text), sampling allows the model to occasionally pick the 2nd, 10th, or 50th most likely word. This injects variety and a more human-like flow into the response.
 - **Analogy:** Imagine a chef deciding what ingredient to add next to a soup. A strict chef (low randomness) always picks the most obvious, safe choice (salt). A creative chef (high randomness) might occasionally throw in something less expected (cinnamon) to create a unique flavor profile.
+- **Structured / Constrained Decoding:** Libraries like **Outlines** and **LMFE** go a step further by mathematically _constraining_ the sampling process to guarantee outputs conform to a specific format (e.g., a JSON schema or regex pattern). This is increasingly the standard approach for reliable function-calling and object generation, eliminating the need for fragile post-processing.
 
 | Parameter              | How it Works                                                                                                                                                                                                                          | Best Used For                                                                                                                                            |
 | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -163,7 +165,7 @@ When an LLM predicts the next word, it doesn't just pick one; it generates a mas
 
 ---
 
-# 2\. Inference
+# 2. Inference
 
 If an LLM’s weights (the data) are the "brain," the inference engine is the "nervous system" and "muscles." An inference engine is the software responsible for loading the model into memory, processing your prompt, and performing the massive mathematical calculations required to generate words.
 
@@ -194,7 +196,7 @@ If an LLM’s weights (the data) are the "brain," the inference engine is the "n
 
 ---
 
-# 3\. Retrieval-Augmented Generation (RAG)
+# 3. Retrieval-Augmented Generation (RAG)
 
 Retrieval-Augmented Generation (RAG) is the critical bridge connecting the **Application** layer to the **Model** layer. While standard LLMs are limited by their training cutoff dates and lack access to private information, RAG allows an AI to securely read, analyze, and cite external, live, or proprietary data (like your company's internal PDFs, live databases, or massive code repositories) _without_ needing to retrain or fine-tune the model.
 
