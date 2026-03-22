@@ -4,7 +4,14 @@ Welcome to **LLM Foundations Handbook**. The AI landscape is evolving at breakne
 
 This repository serves as a foundational "mental model" and reference guide for the modern Generative AI ecosystem. It strips away the hype and breaks down exactly how AI systems are built, run, and integrated today.
 
-### 🎯 Who is this for?
+## Table of Contents
+
+- [The AI Stack](#the-ai-stack)
+- [Model](#model)
+- [Inference](#inference)
+- [Retrieval-Augmented Generation (RAG)](#retrieval-augmented-generation-rag)
+
+## Who is this for?
 
 - **Software Engineers:** Looking to transition into AI/LLM development and needing to understand the tech stack.
 - **Product Managers:** Needing a clear, jargon-free understanding of what is technically possible (and required) to build AI features.
@@ -12,7 +19,7 @@ This repository serves as a foundational "mental model" and reference guide for 
 
 ---
 
-# The AI Stack
+## The AI Stack
 
 Here is an example of an AI system architecture stack. Each system may have more or fewer layers, but this stack is a common foundational standard.
 
@@ -26,7 +33,7 @@ Here is an example of an AI system architecture stack. Each system may have more
 
 ---
 
-# Model
+## Model
 
 ### Parameters (Weights)
 
@@ -69,7 +76,7 @@ Modern LLMs have expanded drastically beyond just predicting the next word into 
 A **Chat Template** is the structural "wrapper" that translates a list of conversational messages (System, User, Assistant) into a single long string of text that the model can actually understand.
 
 - **The Blueprint of Interaction:** Raw LLMs don't naturally know where a user's prompt ends and their own response should begin. Templates use specific **control tokens** (like `<|im_start|>` or `[INST]`) to signal these boundaries.
-- **Structure vs. Intelligence:** Advanced features—especially **Tool Calling** and **Object Generation (JSON)**—depend entirely on the precision of the template. If a template is malformed by even a single space or missing newline, the model may fail to trigger a tool or hallucinate its own "end of turn" markers.
+- **Structure vs. Intelligence:** Advanced features—especially **Tool Calling** and **Object Generation (JSON)**—depend heavily on template precision. Significant formatting mistakes (for example, missing control tokens or inconsistent turn boundaries) can cause tool calls to fail or produce malformed outputs.
 - **The "Jinja2" Standard:** Most modern models (Llama, Mistral, Qwen) use **Jinja2** templating. This allows the model to dynamically change its behavior based on whether it needs to call a tool, display a thought process, or provide a standard reply.
 
 [Example of a Chat Template with Tool Calling support](./public/examples/phi4-mini-chat-template.txt)
@@ -103,7 +110,7 @@ Think of context length as the AI's "short-term working memory." It is completel
 | **Frontier Context** | 1M to 10M    | Ingesting massive document repositories or retaining long-term memory. | Llama 4 Scout (10M), Claude 4.6 (1M) |
 
 <figure style="text-align: center;">
-  <img src="./public/images/context-window.png">
+  <img src="./public/images/context-window.png" alt="Three-turn chat showing how prior inputs, reasoning, and outputs consume a 128k context window until later output gets truncated.">
   <figcaption>Diagram showing how multi-turn inputs and outputs consume a 128k token context window, eventually leading to truncated outputs.</figcaption>
 </figure>
 
@@ -166,7 +173,7 @@ When an LLM predicts the next word, it doesn't just pick one; it generates a mas
 
 ---
 
-# Inference
+## Inference
 
 If an LLM’s weights (the data) are the "brain," the inference engine is the "nervous system" and "muscles." An inference engine is the software responsible for loading the model into memory, processing your prompt, and performing the massive mathematical calculations required to generate words.
 
@@ -197,7 +204,7 @@ If an LLM’s weights (the data) are the "brain," the inference engine is the "n
 
 ---
 
-# Retrieval-Augmented Generation (RAG)
+## Retrieval-Augmented Generation (RAG)
 
 Retrieval-Augmented Generation (RAG) is the critical bridge connecting the **Application** layer to the **Model** layer. While standard LLMs are limited by their training cutoff dates and lack access to private information, RAG allows an AI to securely read, analyze, and cite external, live, or proprietary data (like your company's internal PDFs, live databases, or massive code repositories) _without_ needing to retrain or fine-tune the model.
 
