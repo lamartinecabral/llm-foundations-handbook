@@ -51,14 +51,28 @@ Here is an example of an AI system architecture stack. Each system may have more
 
 ## Model
 
-### Parameters (Weights)
+### Parameters (Size)
 
 Think of parameters as the "brain cells" and "synapses" of an AI. When we say a model is "8 billion parameters" (8B) or "400 billion parameters" (400B), we are referring to the total count of these numbers.
 
 - **What they are:** In a neural network, parameters consist of weights and biases. They are numerical values that determine the strength of the connection between different artificial neurons.
 - **What they do:** During training, the model reads vast amounts of text and constantly adjusts these weights. If it guesses the next word correctly, the weights that led to that guess are strengthened. Over billions of adjustments, these weights end up encoding grammar, facts, reasoning pathways, and language structure.
 - **Analogy:** If an LLM is a massive audio mixing board, the parameters are the billions of tiny sliders and knobs perfectly tuned to produce intelligent, coherent text.
-- **Model Sizes & Families:** Because massive models require expensive hardware, developers release "families" of models. Smaller models (under 10B) are fast and can run locally on laptops or phones. Larger models (100B+) require powerful, multi-GPU servers but offer vastly superior logic, reasoning, and world knowledge. Examples include Meta's Llama 4 family (109B and 400B) and Alibaba's Qwen 2.5 family (scaling from 0.5B up to 72B).
+
+---
+
+## Open-Source Model Landscape
+
+Because massive models require expensive hardware, developers release "families" of models. Smaller models (under 10B) are fast and can run locally on laptops or phones. Larger models (100B+) require powerful, multi-GPU servers but offer vastly superior logic, reasoning, and world knowledge.
+
+| Model Family    | Developer  | Sizes             | Key Release Date |
+| :-------------- | :--------- | :---------------- | :--------------- |
+| **Llama 3.1**   | Meta       | 8B, 70B, 405B     | July 2024        |
+| **Qwen 3.5**    | Alibaba    | 0.6B to 397B      | February 2026    |
+| **Ministral 3** | Mistral AI | 3B, 8B, 14B       | November 2025    |
+| **Granite 4.0** | IBM        | 1B, 3B, 7B, 32B   | October 2025     |
+| **Phi-4**       | Microsoft  | 3.8B, 5.6B, 14.7B | April 2025       |
+| **Gemma 3**     | Google     | 1B, 4B, 12B, 27B  | March 2025       |
 
 ---
 
