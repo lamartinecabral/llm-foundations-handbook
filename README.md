@@ -185,7 +185,7 @@ Fine-tuning is the process of taking an already trained "base" model and trainin
 - **Instruction Tuning:** The most common form of fine-tuning. Models are trained on thousands of structured human conversations to learn how to follow instructions and respect safety guardrails.
 - **Full Fine-Tuning:** The computationally expensive method where every single parameter in the model is updated during training.
 - **PEFT & LoRA:** Parameter-Efficient Fine-Tuning freezes the base model and trains a tiny, lightweight "adapter" on top of it. LoRA (Low-Rank Adaptation) allows a developer to fine-tune a massive model using a single consumer graphics card in just a few hours.
-- **Alignment (RLHF / DPO / GRPO):** After instruction tuning, models are aligned with human preferences using feedback techniques. **RLHF** trains a reward model from human rankings to guide outputs. Newer methods like **DPO** and **GRPO** skip the reward model entirely, achieving equivalent alignment far more efficiently.
+- **Human Alignment:** The final "polish" where models are tuned to match human values and preferences. While **RLHF** (Reinforcement Learning from Human Feedback) traditionally requires training a complex separate "reward model," newer techniques like **DPO** (Direct Preference Optimization) and **GRPO** allow the model to learn directly from preferred vs. rejected examples, making alignment faster and more stable.
 
 [LoRA Fine-Tuning Example](./public/examples/lora-fine-tuning.py)
 
