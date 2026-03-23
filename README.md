@@ -196,35 +196,6 @@ When an LLM predicts the next word, it doesn't just pick one; it generates a mas
 
 If an LLM’s weights (the data) are the "brain," the inference engine is the "nervous system" and "muscles." An inference engine is the software responsible for loading the model into memory, processing your prompt, and performing the massive mathematical calculations required to generate words.
 
-### Hardware & Accelerators (The GPU Landscape)
-
-While the Inference Engine is the software muscle, the actual physical hardware determines what you can run and how fast you can run it.
-
-The most important concept to understand about AI hardware is **The VRAM Bottleneck**. Generating text (inference) is rarely limited by the raw compute speed (teraFLOPS) of a chip. Instead, it is almost entirely bound by **Memory Bandwidth** and **VRAM Capacity** (Video RAM). The entire model must be loaded into the GPU's ultra-fast memory to run efficiently. If a model requires 40GB of memory and your GPU only has 24GB, it will severely bottleneck or fail to run, regardless of how fast the processor itself is.
-
-Because of this, the AI hardware landscape is highly segmented based on memory availability:
-
-<!-- prettier-ignore -->
-| Hardware Tier | Prime Examples | Why It Matters |
-| :------------ | :------------- | :------------- |
-| **Consumer GPUs (Local)** | **NVIDIA RTX 4090 (24GB)**<br>**NVIDIA RTX 5090 (32GB)** | The standard for local AI. High VRAM (24GB+) enables running large, quantized models (up to 70B parameters) at home, with massive bandwidth for fast generation. |
-| **Apple Silicon (Unified)** | **Mac Studio (M3 Ultra)**<br>**MacBook Pro (M-Series)** | Uses "Unified Memory" to pool massive amounts of RAM (up to 512GB). Allows running enterprise-grade models locally without buying multiple expensive PC graphics cards. |
-| **Enterprise Datacenter** | **NVIDIA H100 (80GB)**<br>**NVIDIA B200 (192GB)** | The heavyweights behind major APIs like OpenAI. Built with immense VRAM to serve hundreds of concurrent users at blistering speeds, but prohibitively expensive to own. |
-| **Cloud ASICs (Custom)** | **AWS Inferentia2**<br>**Google TPUs** | Purpose-built AI chips offering a cost-effective cloud alternative to NVIDIA. Allows for massive, scale-out distributed inference at a fraction of the traditional hardware cost. |
-
----
-
-### The "Math" of Sizing Hardware
-
-When determining what hardware you need to run a specific model, engineers use a basic rule of thumb based on **Quantization**:
-
-- **1 Billion Parameters ≈ 1 GB of VRAM** (when heavily quantized to 4-bit or 8-bit precision).
-- **Context Window Overhead:** You must also reserve a few gigabytes of VRAM for the "KV Cache" (the memory required to remember the ongoing conversation).
-
-Therefore, to run an 8B parameter model with a decent conversation history, an 8GB to 12GB consumer graphics card is the practical minimum.
-
----
-
 ### The Inference Landscape
 
 <!-- prettier-ignore -->
@@ -252,6 +223,39 @@ Therefore, to run an 8B parameter model with a decent conversation history, an 8
 | **Old Laptop / Mac / No GPU**      | llama.cpp (via Ollama/LM Studio)       |
 | **Max Speed on Home NVIDIA GPU**   | ExLlamaV2                              |
 | **Mobile App / Web Browser Dev**   | MLC LLM                                |
+
+---
+
+### The VRAM Bottleneck
+
+While the Inference Engine is the software muscle, the actual physical hardware determines what you can run and how fast you can run it.
+
+The most important concept to understand about AI hardware is **The VRAM Bottleneck**. Generating text (inference) is rarely limited by the raw compute speed (teraFLOPS) of a chip. Instead, it is almost entirely bound by two factors: **VRAM Capacity** (Video RAM) dictates _if_ a model can run, and **Memory Bandwidth** dictates _how fast_ it generates text.
+
+The entire model must be loaded into the GPU's ultra-fast memory to run efficiently. If a model requires 40GB of memory and your GPU only has 24GB, it will severely bottleneck or fail to run entirely, regardless of how fast the processor itself is.
+
+To calculate if a model will fit on your graphics card, keep these factors in mind:
+
+- **The Model Weight:** 1 Billion Parameters requires roughly **1 GB of VRAM** at 8-bit precision, or **~0.5 GB** at 4-bit precision.
+- **Context Window Overhead (KV Cache):** You must reserve roughly 1 to 2 gigabytes of VRAM to "remember" the ongoing conversation and process your prompts.
+- **System Overhead:** Your operating system and display typically consume 1 to 2 gigabytes of VRAM just to keep your screen running.
+
+Therefore, to run an 8B parameter model at high speeds with a decent conversation history, an **8GB to 12GB** consumer graphics card is the practical minimum.
+
+---
+
+### The GPU Landscape
+
+<!-- prettier-ignore -->
+| GPU / Hardware | Platform | Compatible Inference Engines |
+| :------------- | :------- | :--------------------------- |
+| **NVIDIA** | CUDA | TensorRT, vLLM, ONNX Runtime (CUDA/TensorRT EPs), Triton Inference Server, llama.cpp (cuBLAS), Text Generation Inference (TGI) |
+| **AMD Radeon** | ROCm | MIGraphX, vLLM (ROCm backend), ONNX Runtime (ROCm EP), llama.cpp (HIPBLAS), TGI |
+| **Apple Silicon** | Metal | MLX, Core ML, llama.cpp (Metal), ONNX Runtime (Core ML EP), ExecuTorch |
+| **Intel Arc** | DPC++ (OneAPI) | OpenVINO, IPEX-LLM (formerly BigDL), ONNX Runtime (OpenVINO EP), llama.cpp (SYCL backend) |
+| **Google TPUs** | JAX/XLA | TensorFlow Serving, PyTorch/XLA, JetStream, vLLM (TPU backend), MaxText |
+| **AWS Inferentia** | AWS Neuron SDK | Transformers NeuronX, vLLM (Neuron backend), TGI (Neuron), TorchServe |
+| **CPU-Only** | OpenCL / x86 / ARM | DeepSparse (Neural Magic), ONNX Runtime (CPU EP), OpenVINO, llama.cpp, NCNN |
 
 ---
 
