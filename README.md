@@ -20,6 +20,9 @@ This repository serves as a foundational "mental model" and reference guide for 
   - [Fine-Tuning](#fine-tuning)
   - [Sampling & Generation](#sampling--generation)
 - [Inference](#inference)
+  - [The Inference Landscape](#the-inference-landscape)
+  - [The VRAM Bottleneck](#the-vram-bottleneck)
+  - [The GPU Landscape](#the-gpu-landscape)
 - [Hugging Face Ecosystem](#hugging-face-ecosystem)
 - [Agents & Tool Use](#agents--tool-use)
 - [Retrieval-Augmented Generation (RAG)](#retrieval-augmented-generation-rag)
@@ -211,9 +214,7 @@ If an LLM’s weights (the data) are the "brain," the inference engine is the "n
 | | GPT4All | Privacy-first desktop application focused on reading your local documents (RAG). |
 | | Llamafile | Packages an LLM and its engine into a single executable file (like a portable USB drive). |
 
----
-
-### Which engine should you choose?
+**Which engine should you choose?**
 
 | Your Goal                          | Recommended Tool                       |
 | :--------------------------------- | :------------------------------------- |
