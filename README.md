@@ -82,10 +82,10 @@ Because massive models require expensive hardware, developers release "families"
 This refers to how parameters are utilized when the model is processing text and generating a response.
 
 <!-- prettier-ignore -->
-| Architecture | Description | Open-Source Examples | Pros & Cons |
-| :----------- | :---------- | :------------------- | :---------- |
-| **Dense Models** | Every single parameter in the neural network is activated and used to process every single word (token). | Llama 3.3 (70B), Qwen 2.5 (72B) | **Pros:** Simpler architecture, easier and more stable to train.<br>**Cons:** Computationally expensive to run as they scale up. |
-| **Mixture of Experts (MoE)** | The model is divided into smaller sub-networks ("experts"). A router activates only the 1 or 2 experts best suited for a specific token. | Llama 4 Scout (109B), DeepSeek-V4 | **Pros:** Massive efficiency gain — only a fraction of parameters are active per token, enabling faster generation.<br>**Cons:** High VRAM usage. Despite the active compute savings, the full model still must be loaded into memory. |
+| Architecture | Description | Open-Source Examples | Pros |
+| :----------- | :---------- | :------------------- | :--- |
+| **Dense Models** | Every single parameter in the neural network is activated and used to process every single word (token). | Llama 3.3 (70B), Qwen 2.5 (72B) | Simpler architecture, easier and more stable to train. |
+| **Mixture of Experts (MoE)** | The model is divided into smaller sub-networks ("experts"). A router activates only the 1 or 2 experts best suited for a specific token. | Llama 4 Scout (109B), DeepSeek-V4 | Massive efficiency gain — only a fraction of parameters are active per token, enabling faster generation. |
 
 ---
 
