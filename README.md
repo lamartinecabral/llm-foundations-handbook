@@ -9,7 +9,7 @@ This repository serves as a foundational "mental model" and reference guide for 
 - [Who is this for?](#who-is-this-for)
 - [The AI Stack](#the-ai-stack)
 - [Model](#model)
-  - [Parameters (Weights)](#parameters-size)
+  - [Parameters (Size)](#parameters-size)
   - [Open-Source Model Landscape](#open-source-model-landscape)
   - [Approaches (Dense vs. MoE)](#approaches-dense-vs-moe)
   - [Capabilities](#capabilities)
