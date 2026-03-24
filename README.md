@@ -62,7 +62,7 @@ Think of parameters as the "brain cells" and "synapses" of an AI. When we say a 
 
 ---
 
-## Open-Source Model Landscape
+### Open-Source Model Landscape
 
 Because massive models require expensive hardware, developers release "families" of models. Smaller models (under 10B) are fast and can run locally on laptops or phones. Larger models (100B+) require powerful, multi-GPU servers but offer vastly superior logic, reasoning, and world knowledge.
 
