@@ -69,11 +69,12 @@ Because massive models require expensive hardware, developers release "families"
 | Model Family    | Developer  | Sizes             | Key Release Date |
 | :-------------- | :--------- | :---------------- | :--------------- |
 | **Llama 3.1**   | Meta       | 8B, 70B, 405B     | July 2024        |
-| **Qwen 3.5**    | Alibaba    | 0.6B to 397B      | February 2026    |
+| **Qwen 3.5**    | Alibaba    | 0.8B to 397B      | February 2026    |
 | **Ministral 3** | Mistral AI | 3B, 8B, 14B       | November 2025    |
 | **Granite 4.0** | IBM        | 1B, 3B, 7B, 32B   | October 2025     |
-| **Phi-4**       | Microsoft  | 3.8B, 5.6B, 14.7B | April 2025       |
+| **Phi-4**       | Microsoft  | 3.8B, 5.6B, 14.7B | December 2024    |
 | **Gemma 3**     | Google     | 1B, 4B, 12B, 27B  | March 2025       |
+| **GPT-OSS**     | OpenAI     | 20B, 120B         | August 2025      |
 
 ---
 
