@@ -75,6 +75,8 @@ Because massive models require expensive hardware, developers release "families"
 | **Phi-4**       | Microsoft  | 3.8B, 5.6B, 14.7B | December 2024    |
 | **Gemma 3**     | Google     | 1B, 4B, 12B, 27B  | March 2025       |
 | **GPT-OSS**     | OpenAI     | 20B, 120B         | August 2025      |
+| **LFM2**        | Liquid AI  | 350M to 24B       | October 2025     |
+| **DeepSeek R1** | DeepSeek   | 1.5B to 671B      | January 2025     |
 
 ---
 
