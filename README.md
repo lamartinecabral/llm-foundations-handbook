@@ -1,7 +1,5 @@
 # **LLMs**: The Prediction Engine
 
----
-
 ## What Does "LLM" Actually Mean?
 
 * **Large:** This refers to two things: the massive dataset they are trained on (billions of pages of text from books, articles, and the internet) and their size (billions of internal settings, called *parameters*, that dictate how they behave).
@@ -40,7 +38,6 @@ Even though share the same fundamental architecture (usually a structure called 
 * **System Prompts:** The underlying, invisible instructions given to the model by the developers (e.g., "Be concise," "Be creative") change its personality.
 
 ---
-.
 
 
 
@@ -49,8 +46,6 @@ Even though share the same fundamental architecture (usually a structure called 
 
 
 # The Runtime Environment
-
----
 
 ## 1. The Inference Engine (The Coordinator)
 
@@ -88,7 +83,6 @@ Depending on the hardware being targeted, an inference engine will plug into dif
 | **OpenBLAS / AVX** | CPUs | When no GPU is available, these backends translate matrix math into parallelized instructions optimized for standard computer processors. |
 
 ---
-.
 
 
 
@@ -98,8 +92,6 @@ Depending on the hardware being targeted, an inference engine will plug into dif
 
 
 # Hardware Requirements
-
----
 
 ## The Core Mathematics of Local Inference
 
@@ -137,7 +129,6 @@ $$\text{Tokens per Second (t/s)} \approx \frac{\text{Memory Bandwidth (GB/s)}}{\
 * **The 1.20 Overhead Multiplier:** A standard baseline representing a 20% overhead. This accounts for the memory and bandwidth consumed by storing and updating the KV Cache (context window), managing context history, and handling runtime operational buffers.
 
 ---
-.
 
 
 
@@ -145,8 +136,6 @@ $$\text{Tokens per Second (t/s)} \approx \frac{\text{Memory Bandwidth (GB/s)}}{\
 
 
 # Architectures: **Transformer** vs. **Mamba**
-
----
 
 ## 1. The Transformer: The King of Context
 
@@ -199,7 +188,6 @@ Rather than one completely replacing the other, the AI landscape has largely shi
 Models like AI21 Labs' *Jamba*, Google DeepMind's *Griffin*, and NVIDIA's *Nemotron-3* intertwine both blocks. They use **Mamba layers** to efficiently digest huge volumes of text and maintain long-range context, interleaved with occasional **Transformer attention layers** to handle localized, high-precision retrieval and reasoning. This hybrid approach delivers the best of both worlds: massive context windows and lightning-fast speeds without sacrificing intelligence.
 
 ---
-.
 
 
 
@@ -207,8 +195,6 @@ Models like AI21 Labs' *Jamba*, Google DeepMind's *Griffin*, and NVIDIA's *Nemot
 
 
 # Approaches: **Dense Models** vs. **Mixture of Experts (MoE)**
-
----
 
 ## 1. Dense Models: The "All Hands on Deck" Approach
 
@@ -257,7 +243,6 @@ Here is how they stack up across the major phases of an LLM's lifecycle:
 * **Choose MoE** if you want to scale a model's capacity massively while keeping inference fast and cost-effective, provided you have enough GPU memory to hold the entire "committee" of experts.
 
 ---
-.
 
 
 
@@ -265,8 +250,6 @@ Here is how they stack up across the major phases of an LLM's lifecycle:
 
 
 # **Quantization**: the art of model compression.
-
----
 
 ## The Core Concept: Shrinking the Numbers
 
@@ -321,7 +304,6 @@ If you have ever browsed Hugging Face for open-source models, you’ve likely se
 > Quantization is not a free lunch. While it drastically reduces memory usage and speeds up token generation, compressing a model too much (e.g., down to 2-bit) causes it to lose its "sanity," leading to gibberish formatting, repetitive loops, and factual degradation. Currently, **4-bit and 5-bit quantization** are considered the "sweet spots" where you get massive resource savings with almost unnoticeable drops in quality.
 
 ---
-.
 
 
 
@@ -330,8 +312,6 @@ If you have ever browsed Hugging Face for open-source models, you’ve likely se
 
 
 # **Model Formats**: The packages
-
----
 
 ## 1. Safetensors (.safetensors)
 
@@ -390,7 +370,6 @@ MLX isn't strictly a standalone file extension; rather, it is an open-source mac
 | **MLX** | Apple Research | Apple Silicon (Mac/iPad) | Local Inference & Tuning | Tailored for Mac Unified Memory, supports local training. |
 
 ---
-.
 
 
 
