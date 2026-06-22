@@ -164,7 +164,7 @@ Instead of cross-referencing everything all at once like a Transformer, Mamba be
 
 ### Pros & Cons
 
-* **The Good (Linear Efficiency):** Mamba scales **linearly** ($O(N)$) with sequence length. If your prompt length increases tenfold, the compute only increases tenfold. It features near-constant memory usage (no massive KV cache), yielding lightning-fast inference and the ability to process millions of tokens with ease.
+* **The Good (Linear Efficiency):** Mamba scales **linearly** ( $O(N)$ ) with sequence length. If your prompt length increases tenfold, the compute only increases tenfold. It features near-constant memory usage (no massive KV cache), yielding lightning-fast inference and the ability to process millions of tokens with ease.
 * **The Bad (Lossy Compression):** Because Mamba compresses information into a fixed-size state, it can suffer from "information loss." It struggles compared to Transformers on tasks requiring precise verbatim data retrieval (e.g., "Find the exact 3rd word in paragraph 42") or dense, intricate multi-step reasoning.
 
 ---
@@ -174,7 +174,7 @@ Instead of cross-referencing everything all at once like a Transformer, Mamba be
 | Feature | Transformer | Mamba |
 | --- | --- | --- |
 | **Core Mechanism** | Self-Attention (Global lookback) | Selective State Space Model (Dynamic recurrence) |
-| **Scaling Complexity** | Quadratic ($O(N^2)$) | Linear ($O(N)$) |
+| **Scaling Complexity** | Quadratic ( $O(N^2)$ ) | Linear ( $O(N)$ ) |
 | **Inference Speed** | Slows down as context grows | Consistently fast; fixed-size memory state |
 | **Memory Footprint** | Massive (Requires expanding KV Cache) | Low and constant |
 | **Best Suited For** | Complex reasoning, exact retrieval, code generation | Long document synthesis, audio/video streaming, edge AI |
